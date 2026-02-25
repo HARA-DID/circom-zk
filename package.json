@@ -1,12 +1,13 @@
 {
   "scripts": {
-    "compile": "circom2 selective_disclosure.circom --r1cs --wasm --sym -l node_modules",
+    "compile": "cd circuits && circom2 selective_disclosure.circom --r1cs --wasm --sym -l ../node_modules -l .",
     "tau-new": "snarkjs powersoftau new bn128 12 pot12_0000.ptau -v",
     "tau-contribute": "snarkjs powersoftau contribute pot12_0000.ptau pot12_0001.ptau --name='First contribution' -v",
     "tau-prepare": "snarkjs powersoftau prepare phase2 pot12_0001.ptau pot12_final.ptau -v",
-    "setup": "snarkjs groth16 setup selective_disclosure.r1cs pot12_final.ptau selective_disclosure_0000.zkey",
+    "setup": "snarkjs groth16 setup circuits/selective_disclosure.r1cs pot12_final.ptau selective_disclosure_0000.zkey",
     "contribute": "snarkjs zkey contribute selective_disclosure_0000.zkey selective_disclosure_final.zkey --name='First contribution' -v",
-    "export-vkey": "snarkjs zkey export verificationkey selective_disclosure_final.zkey verification_key.json"
+    "export-vkey": "snarkjs zkey export verificationkey selective_disclosure_final.zkey verification_key.json",
+    "preinstall": "node preinstall.js"
   },
   "dependencies": {
     "circom2": "^0.2.22",

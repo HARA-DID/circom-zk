@@ -15,25 +15,36 @@ To install the necessary dependencies, including the `circom2` WASM compiler and
 npm install
 ```
 
+## Project Structure
+
+The project is organized into modular components for better maintainability and reusability:
+
+- `circuits/`
+  - `selective_disclosure.circom`: The main circuit entry point.
+  - `templates/`
+    - `identity.circom`: Identity binding logic (Poseidon).
+    - `merkle.circom`: Merkle proof verification.
+    - `disclosure.circom`: Selective disclosure logic (Numeric/Hash).
+- `package.json`: Contains dependency definitions and improved modular build scripts.
+- `.gitignore`: Ensures large binary artifacts and `node_modules` are not tracked.
+
 ## Compilation
 
-The project uses the `circom2` npm package, which allows you to compile circuits without needing to install the Rust-based compiler manually.
-
-To compile the `selective_disclosure.circom` circuit:
+To compile the modular circuits, run:
 
 ```bash
 npm run compile
 ```
 
-This will generate:
+This command enters the `circuits/` directory and compiles `selective_disclosure.circom`, resolving all template includes automatically. It generates:
 
-- `selective_disclosure.r1cs`: The rank-1 constraint system.
-- `selective_disclosure_js/`: A directory containing the WASM witness generator.
-- `selective_disclosure.sym`: A symbols file for debugging.
+- `circuits/selective_disclosure.r1cs`
+- `circuits/selective_disclosure_js/` (WASM witness generator)
+- `circuits/selective_disclosure.sym`
 
 ## ZK Workflow (SnarkJS)
 
-After compilation, you can proceed with the trusted setup and proof generation.
+After compilation, proceed with the trusted setup. The scripts in `package.json` are pre-configured to handle the file paths in the `circuits/` directory.
 
 ### 1. Powers of Tau (Phase 1)
 
