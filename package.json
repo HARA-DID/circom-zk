@@ -7,7 +7,6 @@
     "setup": "snarkjs groth16 setup circuits/selective_disclosure.r1cs pot12_final.ptau selective_disclosure_0000.zkey",
     "contribute": "snarkjs zkey contribute selective_disclosure_0000.zkey selective_disclosure_final.zkey --name='First contribution' -v",
     "export-vkey": "snarkjs zkey export verificationkey selective_disclosure_final.zkey verification_key.json",
-    "preinstall": "node preinstall.js"
   },
   "dependencies": {
     "circom2": "^0.2.22",
